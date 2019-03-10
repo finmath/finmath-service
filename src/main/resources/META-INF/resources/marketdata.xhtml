@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Market Data Retrieval Service</title>
+</h:head>
+
+<h:body>
+	<h:form id="market-data-form">
+
+		<p:panel header="Market Data Retrieval Service">
+			<h:panelGrid columns="1" cellpadding="4">
+				<h:outputText value="" />
+				<p:calendar id="date-picker" value="#{marketDataGenerator.dateAsDate}" mode="inline" update="result-panel" pages="3">
+					<p:ajax event="dateSelect" listener="#{marketDataGenerator.dateChange}" update="date result-panel" />
+				</p:calendar>
+			</h:panelGrid>
+			<h:panelGrid columns="3" cellpadding="4">
+				<h:outputText value="Date: " />
+				<p:inputText id="date" value="#{marketDataGenerator.dateString}" update="result-panel date-picker" />
+				<p:commandButton id="submit" value="Submit" update="result-panel date-picker" />
+			</h:panelGrid>
+		</p:panel>
+
+		<p:panel header="Result" widgetVar="resultPanel" render="@form">
+			<h:panelGrid id="result-panel" columns="1" cellpadding="4">
+				<h:outputText value="#{marketDataGenerator.status()}" />
+
+				<p:chart type="line" model="#{marketDataGenerator.chart}"
+					style="height:300px;" />
+
+				<p:dataTable id="dataTable" var="item"
+					value="#{marketDataGenerator.items}">
+					<p:column headerText="time">
+						<h:outputText value="#{item.key}" />
+					</p:column>
+
+					<p:column headerText="discount factor">
+						<h:outputText value="#{item.value}" />
+					</p:column>
+				</p:dataTable>
+
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
