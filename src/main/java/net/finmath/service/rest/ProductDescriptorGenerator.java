@@ -65,17 +65,19 @@ public class ProductDescriptorGenerator {
 		Double swapRate = Math.floor((random.nextDouble() * 7 - 2)*100*100) / 100.0 / 100.0 / 100.0;
 		result.put("swapRate", swapRate);
 
-		
-		ScheduleMetaData schedulePrototype = new ScheduleMetaData(Frequency.QUARTERLY, DaycountConvention.ACT_360, ShortPeriodConvention.FIRST, DateRollConvention.FOLLOWING, new BusinessdayCalendarExcludingTARGETHolidays(), 2, 2, false);
-		Schedule scheduleFloat = schedulePrototype.generateSchedule(referenceDate, startDate, endDate);
+		Frequency frequencyFloat	= random.nextBoolean() ? Frequency.QUARTERLY : Frequency.SEMIANNUAL;
+		result.put("leg1.frequency", frequencyFloat);
 
+		Frequency frequencyFix		= Frequency.ANNUAL;
+		result.put("leg2.frequency", frequencyFix);
+
+		ScheduleMetaData schedulePrototypeFloat = new ScheduleMetaData(frequencyFloat, DaycountConvention.ACT_360, ShortPeriodConvention.FIRST, DateRollConvention.FOLLOWING, new BusinessdayCalendarExcludingTARGETHolidays(), 2, 2, false);
+		Schedule scheduleFloat = schedulePrototypeFloat.generateSchedule(referenceDate, startDate, endDate);
 		result.put("leg1.periods", scheduleFloat.getPeriods());
 
-		ScheduleMetaData schedulePrototype2 = new ScheduleMetaData(Frequency.ANNUAL, DaycountConvention.ACT_360, ShortPeriodConvention.FIRST, DateRollConvention.FOLLOWING, new BusinessdayCalendarExcludingTARGETHolidays(), 2, 2, false);
-		Schedule scheduleFix = schedulePrototype2.generateSchedule(referenceDate, startDate, endDate);
-
+		ScheduleMetaData schedulePrototypeFix = new ScheduleMetaData(Frequency.ANNUAL, DaycountConvention.ACT_360, ShortPeriodConvention.FIRST, DateRollConvention.FOLLOWING, new BusinessdayCalendarExcludingTARGETHolidays(), 2, 2, false);
+		Schedule scheduleFix = schedulePrototypeFix.generateSchedule(referenceDate, startDate, endDate);
 		result.put("leg2.periods", scheduleFix.getPeriods());
-		
 		
 		return result;
 	}
