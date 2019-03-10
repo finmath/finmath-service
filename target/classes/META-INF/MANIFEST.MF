@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Built-By: fries
-Build-Jdk: 10
-Implementation-Title: finmath-service
-Implementation-Version: 0.0.1-SNAPSHOT
-Implementation-Vendor-Id: net.finmath
-Implementation-URL: http://maven.apache.org
-Created-By: Maven Integration for Eclipse
-
