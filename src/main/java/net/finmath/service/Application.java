@@ -10,7 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Spring-boot application entry point (this will start the RESTful server an do a lot of stuff just from the annotations).
+ * Spring-boot application entry point (this will start the RESTful server an does a lot of stuff just from the annotations).
  * 
  * @author Christian Fries
  */
