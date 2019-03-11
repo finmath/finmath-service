@@ -71,6 +71,9 @@ public class ProductDescriptorGenerator {
 		Frequency frequencyFix		= Frequency.ANNUAL;
 		result.put("leg2.frequency", frequencyFix);
 
+		result.put("leg1.daycountConvention", DaycountConvention.ACT_360);
+		result.put("leg2.daycountConvention", DaycountConvention.ACT_360);
+
 		ScheduleMetaData schedulePrototypeFloat = new ScheduleMetaData(frequencyFloat, DaycountConvention.ACT_360, ShortPeriodConvention.FIRST, DateRollConvention.FOLLOWING, new BusinessdayCalendarExcludingTARGETHolidays(), 2, 2, false);
 		Schedule scheduleFloat = schedulePrototypeFloat.generateSchedule(referenceDate, startDate, endDate);
 		result.put("leg1.periods", scheduleFloat.getPeriods());
