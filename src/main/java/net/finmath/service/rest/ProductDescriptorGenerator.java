@@ -9,7 +9,13 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,12 +37,17 @@ import net.finmath.time.businessdaycalendar.BusinessdayCalendarExcludingTARGETHo
 @RestController
 public class ProductDescriptorGenerator {
 
+	private static ExecutorService xyzMethodExecutor = Executors.newFixedThreadPool(10);
+	
 	/**
-	 * Request list of event times.
+	 * Generate a property map scribing a product. The product is randomly generated.
+	 * The method may be used for testing
+	 * a service infrastructure.
 	 * 
-	 * @param type
-	 * @param id
-	 * @return
+	 * @param productType A string identifying the product type.
+	 * @param id The id of the product.
+	 * @param formatVersion
+	 * @return A Map<String, Object> representing the product.
 	 */
 	@RequestMapping("/productdescriptorgenerator")
 	public Map<String, Object> getProductDescriptor(
@@ -83,5 +94,15 @@ public class ProductDescriptorGenerator {
 		result.put("leg2.periods", scheduleFix.getPeriods());
 		
 		return result;
+	}
+	
+	@PostMapping("/api/xyzMethod")
+	public Response xyzMethod(@RequestBody Request request) throws InterruptedException, ExecutionException {
+		return xyzMethodExecutor.submit(() -> { return handleXyzMethod(request); }).get();
+	}
+
+	private Response handleXyzMethod(Request request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

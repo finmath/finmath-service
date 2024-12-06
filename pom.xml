@@ -19,12 +19,16 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<src.main.java.dir>src/main/java</src.main.java.dir> <src.test.java.dir>src/test/java</src.test.java.dir> 
-		<src.main.kotlin.dir>src/main/kotlin</src.main.kotlin.dir> <src.test.kotlin.dir>src/test/kotlin</src.test.kotlin.dir>
+		<src.main.java.dir>src/main/java</src.main.java.dir>
+		<src.test.java.dir>src/test/java</src.test.java.dir>
+		<src.main.kotlin.dir>src/main/kotlin</src.main.kotlin.dir>
+		<src.test.kotlin.dir>src/test/kotlin</src.test.kotlin.dir>
 		<kotlin.version>1.2.0</kotlin.version>
 		<junit.version>4.12</junit.version>
-		<java.version>1.8</java.version>
+		<java.version>11</java.version>
 		<joinfaces.version>4.0.3</joinfaces.version>
+		<!-- maven plugins -->
+		<compiler-plugin.version>3.8.1</compiler-plugin.version>
 	</properties>
 
 	<licenses>
@@ -51,13 +55,7 @@
 		<dependency>
 			<groupId>net.finmath</groupId>
 			<artifactId>finmath-lib</artifactId>
-			<version>4.0.6</version>
-		</dependency>
-
-		<dependency>
-			<groupId>net.finmath</groupId>
-			<artifactId>finmath-smart-derivative-contract</artifactId>
-			<version>0.1.2</version>
+			<version>6.0.19</version>
 		</dependency>
 
 		<dependency>
@@ -66,14 +64,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>2.9.2</version>
-		</dependency>
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger-ui</artifactId>
-			<version>2.9.2</version>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.3.1</version>
 		</dependency>
 
 		<dependency>
@@ -104,6 +97,16 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${compiler-plugin.version}</version>
+				<configuration>
+					<source>11</source>
+					<target>11</target>
+					<compilerVersion>11</compilerVersion>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -115,7 +115,7 @@ public class MarketDataGenerator {
 
 	public LineChartModel getChart() {
 		LineChartModel model = new LineChartModel();
-		model.setLegendPosition("s");
+		model.setLegendPosition("n");
 		model.setTitle("Interest rate curve (zero rates) as of " + date.toString());
 
 		LineChartSeries series1 = new LineChartSeries();
