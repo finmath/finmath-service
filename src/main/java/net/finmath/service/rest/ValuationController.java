@@ -115,7 +115,45 @@ public class ValuationController {
 
 		return results;
 	}
-	
+
+	@RequestMapping("/valuation2")
+	public List<Map<String, Object>> getValuationWithShift2(
+			@RequestParam(value="shifts")
+			List<double[]> shifts
+			)
+	{
+		List<Map<String, Object>> results = new ArrayList<>();
+
+		// Dummy implementation - just return the sum of the shifts in each szenario. Will be replaced by a valuation.
+		for(double[] shift : shifts) {
+			Map<String, Object> result = new HashMap<>();
+			
+			/*
+			 * Build market data from shifts.
+			 * This also applied a kind of scaling to allow that the shifts are on similar scales.
+			 * 
+			 */
+			
+			double value = 0.0;
+			
+			int parameterIndex = 0;
+			
+			// Create interest rate curve (forward rates)
+			
+			
+			
+			for(int i=0; i<shift.length; i++) {
+				value += shift[i];
+			}
+			result.put("shift", shift);
+			result.put("value", value);
+			results.add(result);
+		}
+		
+
+		return results;
+	}
+
 	public static LIBORModelMonteCarloSimulationModel createLIBORMarketModel(
 			final RandomVariableFactory randomVariableFactory, final int numberOfPaths, final int numberOfFactors, final double correlationDecayParam) throws CalculationException {
 

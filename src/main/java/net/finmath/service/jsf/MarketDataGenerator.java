@@ -34,7 +34,6 @@ import net.finmath.marketdata.model.curves.DiscountCurveNelsonSiegelSvensson;
  * 
  * @author Christian Fries
  */
-@Named
 @SessionScoped
 public class MarketDataGenerator {
 
