@@ -7,6 +7,7 @@ package net.finmath.service.rest;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,6 +73,18 @@ public class ValuationController {
 		
 		double[] shift = { 0.0, 0.1, 0.0 };
 		List<double[]> shifts = new ArrayList<>();
+		shifts.add(shift);
+		
+		List<Map<String, Object>> results = (new ValuationController()).getValuationWithShift(shifts);
+		for(Map<String, Object> result : results) {
+			for(Map.Entry<String, Object> entry : result.entrySet()) {
+				Object value = entry.getValue();
+				String valueString = value.toString();
+				if(value.getClass() == double[].class) valueString = Arrays.toString((double[]) value);
+				System.out.println("\t" + entry.getKey() + "\t" + valueString);
+			}
+			System.out.println("_".repeat(40));
+		}
 		
 	}
 
